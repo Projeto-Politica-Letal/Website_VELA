@@ -135,69 +135,164 @@
       opacity: 0.8;
     }
 
- <!-- ================= SEÇÃO INÍCIO ================= -->
-<section id="inicio" style="background-color: #050505; padding: 70px 0 90px; text-align: center; color: #FFF;">
-  <div class="container">
-    
-    <!-- Bloco dos Grandes Números Estáticos com Efeito de Contagem -->
-    <div style="margin-bottom: 40px;">
-      <!-- O atributo data-target guarda o número final que veio da sua base de dados -->
-      <h1 class="counter" data-target="1228" style="font-size: 5rem; font-weight: 900; line-height: 1; color: #FFF;">0</h1>
-      <p style="font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 8px;">
-        casos de <span style="background-color: #FFF; color: #9E2A0E; padding: 1px 6px;">violência política letal</span> no Brasil
-      </p>
-    </div>
+    /* ================= SEÇÃO INÍCIO ================= */
+    #inicio {
+      background-color: var(--bg-black);
+      padding: 80px 0 90px;
+      text-align: center;
+    }
 
-    <!-- Sub-números (Assassinatos, Tentativas, Ameaças) -->
-    <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin: 50px 0;">
-      <div>
-        <h2 class="counter" data-target="760" style="font-size: 3rem; font-weight: 900;">0</h2>
-        <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase;">casos de <mark style="background:#FFF; color:#9E2A0E; padding:0 4px;">assassinatos políticos</mark> no Brasil</span>
-      </div>
-      <div>
-        <h2 class="counter" data-target="358" style="font-size: 3rem; font-weight: 900;">0</h2>
-        <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase;">casos de <mark style="background:#FFF; color:#9E2A0E; padding:0 4px;">tentativas de assassinato</mark> no Brasil</span>
-      </div>
-      <div>
-        <h2 class="counter" data-target="110" style="font-size: 3rem; font-weight: 900;">0</h2>
-        <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase;">casos de <mark style="background:#FFF; color:#9E2A0E; padding:0 4px;">ameaças de assassinato</mark> no Brasil</span>
-      </div>
-    </div>
+    /* Linha 1: Destaque Principal (1.228) */
+    .hero-main-stat {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
 
-    <!-- Texto complementar -->
-    <p class="hero-subtitle" style="max-width: 650px; margin: 36px auto 50px; font-size: 1.25rem;">
-      Ao longo de vinte anos, entre <strong>2003 e 2023</strong>, houve uma média de <strong>61,4</strong> casos de <span style="background-color: #FFF; color: #9E2A0E; font-weight: 800; padding: 1px 6px;">violência política letal</span> por ano.
-    </p>
+    .digit-group {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+    }
 
-  </div>
-</section>
+    .digit-box {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #242424;
+      color: var(--text-light);
+      font-weight: 900;
+      line-height: 1;
+      border-radius: 2px;
+    }
 
-<!-- Script JavaScript responsável por animar os números do zero até o valor final -->
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const counters = document.querySelectorAll('.counter');
-    
-    counters.forEach(counter => {
-      const updateCount = () => {
-        const target = +counter.getAttribute('data-target');
-        const count = +counter.innerText.replace(/\./g, ''); // Remove pontos se houver
-        
-        // Define a velocidade da animação (quanto menor o divisor, mais rápido)
-        const speed = 200; 
-        const increment = target / speed;
+    .digit-dot {
+      font-weight: 900;
+      color: var(--text-light);
+      line-height: 1;
+    }
 
-        if (count < target) {
-          counter.innerText = Math.ceil(count + increment).toLocaleString('pt-BR');
-          setTimeout(updateCount, 20);
-        } else {
-          counter.innerText = target.toLocaleString('pt-BR'); // Garante que encerra no número exato formatado
-        }
-      };
+    .hero-main-stat .digit-box {
+      font-size: 6.2rem;
+      padding: 8px 14px;
+    }
 
-      updateCount();
-    });
-  });
-</script>
+    .hero-main-stat .digit-dot {
+      font-size: 5.5rem;
+      margin: 0 -2px;
+    }
+
+    .hero-main-label {
+      text-align: left;
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.25;
+      max-width: 260px;
+    }
+
+    .text-rust {
+      color: var(--accent-rust);
+    }
+
+    /* Subtítulo média anual */
+    .hero-subtitle {
+      max-width: 650px;
+      margin: 0 auto 76px;
+      font-size: 1.25rem;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    .highlight-rust-bg {
+      background-color: var(--text-light);
+      color: var(--accent-rust);
+      font-weight: 800;
+      padding: 1px 6px;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
+    /* Linha 2: Três colunas (760, 358, 110) */
+    .hero-substats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 860px;
+      margin: 0 auto 72px;
+    }
+
+    .substat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .substat-item .digit-group {
+      gap: 4px;
+      margin-bottom: 12px;
+    }
+
+    .substat-item .digit-box {
+      font-size: 3rem;
+      padding: 4px 8px;
+    }
+
+    .substat-label {
+      font-size: 0.85rem;
+      font-weight: 800;
+      line-height: 1.45;
+      max-width: 210px;
+    }
+
+    /* Linha 3: Duas colunas de porcentagem (63.1%, 35.7%) */
+    .hero-percentages-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px;
+      max-width: 720px;
+      margin: 0 auto 64px;
+    }
+
+    .percent-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .percent-number {
+      font-size: 3.1rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .percent-label {
+      font-size: 0.85rem;
+      font-weight: 800;
+      line-height: 1.45;
+      max-width: 270px;
+    }
+
+    /* Colagem de rostos */
+    .collage-banner {
+      max-width: 780px;
+      margin: 0 auto 44px;
+    }
+
+    .collage-banner img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .hero-footer-text {
+      font-size: 1.35rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
 
     /* ================= SEÇÃO MONITOR ================= */
     #monitor {
@@ -780,6 +875,22 @@
 
     /* ================= RESPONSIVIDADE ================= */
     @media (max-width: 900px) {
+      .hero-main-stat .digit-box {
+        font-size: 3.6rem;
+        padding: 6px 10px;
+      }
+
+      .hero-main-stat .digit-dot {
+        font-size: 3.2rem;
+      }
+
+      .hero-main-label {
+        text-align: center;
+        max-width: 100%;
+      }
+
+      .hero-substats-grid,
+      .hero-percentages-grid,
       .charts-header,
       .newsletter-grid,
       .apoie-columns,
@@ -838,19 +949,82 @@
   <!-- ================= 1. SEÇÃO INÍCIO ================= -->
   <section id="inicio">
     <div class="container">
-      
-      <!-- [IFRAME 1: PAINEL DE CONTADORES / BIG NUMBERS] -->
-      <div class="iframe-placeholder">
-        <p>[ESPAÇO RESERVADO PARA IFRAME — BIG NUMBERS DO INÍCIO]</p>
-        <span>Inserir aqui o iframe com os contadores dinâmicos (1.228 casos, 760 assassinatos, 358 tentativas, 110 ameaças, 63.1% políticos, 35.7% ativistas)</span>
-        <!-- Exemplo de uso quando tiver o link:
-        <iframe src="URL_DO_APP_CONTADORES" width="100%" height="480" frameborder="0"></iframe> 
-        -->
+
+      <!-- Linha 1: 1.228 casos de violência política letal no Brasil -->
+      <div class="hero-main-stat">
+        <div class="digit-group" id="stat-total" data-stat-key="total_casos" data-fallback="1228" data-boxed="true" aria-label="1.228">
+          <span class="digit-box">0</span>
+          <span class="digit-dot">.</span>
+          <span class="digit-box">0</span>
+          <span class="digit-box">0</span>
+          <span class="digit-box">0</span>
+        </div>
+        <div class="hero-main-label">
+          casos de <span class="text-rust">violência política letal</span> no Brasil
+        </div>
       </div>
 
+      <!-- Subtítulo: Média anual (61,4) -->
       <p class="hero-subtitle">
-        Ao longo de vinte anos, entre <strong>2003 e 2023</strong>, houve uma média de <strong>61,4</strong> casos de <span class="highlight-rust-bg">violência política letal</span> por ano.
+        Ao longo de vinte anos, entre <strong>2003 e 2023</strong>, houve uma média de <strong id="stat-media" data-stat-key="media_anual" data-fallback="61.4" data-decimals="1">0,0</strong> casos de <span class="highlight-rust-bg">violência política letal</span> por ano.
       </p>
+
+      <!-- Linha 2: 760 / 358 / 110 -->
+      <div class="hero-substats-grid">
+        <div class="substat-item">
+          <div class="digit-group" id="stat-assassinatos" data-stat-key="assassinatos" data-fallback="760" data-boxed="true" aria-label="760">
+            <span class="digit-box">0</span>
+            <span class="digit-box">0</span>
+            <span class="digit-box">0</span>
+          </div>
+          <p class="substat-label">
+            casos de <span class="highlight-rust-bg">assassinatos políticos</span> no Brasil
+          </p>
+        </div>
+
+        <div class="substat-item">
+          <div class="digit-group" id="stat-tentativas" data-stat-key="tentativas" data-fallback="358" data-boxed="true" aria-label="358">
+            <span class="digit-box">0</span>
+            <span class="digit-box">0</span>
+            <span class="digit-box">0</span>
+          </div>
+          <p class="substat-label">
+            casos de <span class="highlight-rust-bg">tentativas de assassinato</span> no Brasil
+          </p>
+        </div>
+
+        <div class="substat-item">
+          <div class="digit-group" id="stat-ameacas" data-stat-key="ameacas" data-fallback="110" data-boxed="true" aria-label="110">
+            <span class="digit-box">0</span>
+            <span class="digit-box">0</span>
+            <span class="digit-box">0</span>
+          </div>
+          <p class="substat-label">
+            casos de <span class="highlight-rust-bg">ameaças de assassinato</span> no Brasil
+          </p>
+        </div>
+      </div>
+
+      <!-- Linha 3: 63.1% e 35.7% -->
+      <div class="hero-percentages-grid">
+        <div class="percent-item">
+          <div class="percent-number">
+            <span id="stat-pct-politicos" data-stat-key="pct_politicos" data-fallback="63.1" data-decimals="1" data-dot-decimal="true">0.0</span>%
+          </div>
+          <p class="percent-label">
+            dos casos de <span class="text-rust">assassinatos políticos</span> no Brasil são de <span class="highlight-rust-bg">políticos institucionais</span>
+          </p>
+        </div>
+
+        <div class="percent-item">
+          <div class="percent-number">
+            <span id="stat-pct-ativistas" data-stat-key="pct_ativistas" data-fallback="35.7" data-decimals="1" data-dot-decimal="true">0.0</span>%
+          </div>
+          <p class="percent-label">
+            dos casos de <span class="text-rust">assassinatos políticos</span> no Brasil são de <span class="highlight-rust-bg">ativistas</span>
+          </p>
+        </div>
+      </div>
 
       <!-- ARQUIVO EXTERNO: Colagem de rostos em preto e branco -->
       <div class="collage-banner">
@@ -858,7 +1032,7 @@
       </div>
 
       <p class="hero-footer-text">
-        Os casos afetaram <strong>todos os 27 estados</strong> brasileiros e um total de <strong>532 cidades</strong>.
+        Os casos afetaram <strong>todos os 27 estados</strong> brasileiros e um total de <strong><span id="stat-cidades" data-stat-key="total_cidades" data-fallback="532">0</span> cidades</strong>.
       </p>
     </div>
   </section>
@@ -1215,6 +1389,99 @@
       </div>
     </div>
   </footer>
+
+  <!-- ================= SCRIPT DE CARREGAMENTO EXTERNO + ANIMAÇÃO DOS NÚMEROS ================= -->
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      // Caminho do arquivo JSON externo atualizado pelo repositório/automação
+      const STATS_URL = "assets/data/stats.json";
+      let externalStats = {};
+
+      try {
+        const response = await fetch(STATS_URL, { cache: "no-store" });
+        if (response.ok) {
+          externalStats = await response.json();
+        }
+      } catch (err) {
+        console.info("Usando valores padrão de fallback enquanto stats.json não está disponível.");
+      }
+
+      // Renderiza cada dígito dentro das caixas escuras (ex.: [1] . [2] [2] [8])
+      function renderBoxedDigits(element, currentValue, targetValue) {
+        const targetFormatted = Math.round(targetValue).toLocaleString("pt-BR");
+        const currentFormatted = Math.round(currentValue)
+          .toLocaleString("pt-BR")
+          .padStart(targetFormatted.length, "0");
+
+        element.innerHTML = "";
+        for (const char of currentFormatted) {
+          if (char === ".") {
+            const dot = document.createElement("span");
+            dot.className = "digit-dot";
+            dot.textContent = ".";
+            element.appendChild(dot);
+          } else {
+            const box = document.createElement("span");
+            box.className = "digit-box";
+            box.textContent = char;
+            element.appendChild(box);
+          }
+        }
+      }
+
+      // Animação suave de 0 até o número alvo
+      function animateElement(el, target) {
+        const duration = 1600; // Duração em milissegundos
+        const isBoxed = el.dataset.boxed === "true";
+        const decimals = parseInt(el.dataset.decimals || "0", 10);
+        const dotDecimal = el.dataset.dotDecimal === "true";
+        const startTime = performance.now();
+
+        function step(now) {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          // Curva easeOutQuart para desacelerar suavemente ao chegar no número final
+          const eased = 1 - Math.pow(1 - progress, 4);
+          const current = target * eased;
+
+          if (isBoxed) {
+            renderBoxedDigits(el, current, target);
+          } else if (decimals > 0) {
+            const formatted = current.toFixed(decimals);
+            el.textContent = dotDecimal ? formatted : formatted.replace(".", ",");
+          } else {
+            el.textContent = Math.round(current).toLocaleString("pt-BR");
+          }
+
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            // Garante o valor final exato ao encerrar
+            if (isBoxed) {
+              renderBoxedDigits(el, target, target);
+              el.setAttribute("aria-label", Math.round(target).toLocaleString("pt-BR"));
+            } else if (decimals > 0) {
+              const formatted = target.toFixed(decimals);
+              el.textContent = dotDecimal ? formatted : formatted.replace(".", ",");
+            } else {
+              el.textContent = Math.round(target).toLocaleString("pt-BR");
+            }
+          }
+        }
+
+        requestAnimationFrame(step);
+      }
+
+      // Dispara a animação para todos os indicadores da seção Início
+      const statElements = document.querySelectorAll("[data-stat-key]");
+      statElements.forEach((el) => {
+        const key = el.dataset.statKey;
+        const fallback = parseFloat(el.dataset.fallback);
+        const rawValue = externalStats[key] !== undefined ? parseFloat(externalStats[key]) : fallback;
+        animateElement(el, rawValue);
+      });
+    });
+  </script>
 
 </body>
 </html>
