@@ -1,14 +1,12 @@
-# app.R (somente Monitor e gráficos, para embed em iframe)
+# app.R (versão pública: Monitor + gráficos, lê monitor_data.rds)
 source("global.R")
 source("R/ui_vela.R")
 
 vela_fmt <- function(x) format(round(as.numeric(x)), big.mark = ".", decimal.mark = ",", scientific = FALSE)
 
-# Ranking de cidades: por ora CONTAGEM de casos
-rank_cidades <- app_data$core %>%
-  dplyr::filter(!is.na(cidade), !is.na(uf)) %>%
-  dplyr::count(cidade, uf, sort = TRUE) %>%
-  dplyr::slice_head(n = 10)
+# Ranking de cidades e total, calculados em scripts/exporta_monitor.R
+rank_cidades <- app_data$rank_cidades
+n_total      <- app_data$n_total
 
 # ==============================================================================
 # SEÇÃO MONITOR (mapa + filtros)
@@ -70,7 +68,7 @@ vela_charts <- function() {
                         div(class = "bar", style = sprintf("width:%.1f%%", 100 * r$n / maxv),
                             span(sprintf("%s (%s)", r$cidade, r$uf)), tags$b(r$n)))
                     })),
-            p(class = "vela-chart__note", paste0("n = ", vela_fmt(nrow(app_data$core)))))
+            p(class = "vela-chart__note", paste0("n = ", vela_fmt(n_total))))
     )
   )
 }
@@ -105,7 +103,7 @@ vela_plotly <- function(p, mode = c("light", "dark")) {
 }
 
 server <- function(input, output, session) {
-  
+
   # ---- Mapa ------------------------------------------------------------------
   mapa_data <- reactive({
     req(app_data$map$points, input$mapa_anos)
@@ -124,13 +122,13 @@ server <- function(input, output, session) {
       df <- dplyr::filter(df, sexo == input$mapa_sexo)
     df
   })
-  
+
   output$mapa_n_casos <- renderText(paste0(fmt_n(nrow(mapa_data())), " casos exibidos"))
-  
+
   output$mapa_principal <- renderPlotly({
     plot_map_points(mapa_data(), app_data$map$pal_colors) %>% vela_plotly("dark")
   })
-  
+
   # ---- Gráficos --------------------------------------------------------------
   output$tl_annual <- renderPlotly({
     req(app_data$timeline$annual_series, app_data$timeline$annual_by_tipo, app_data$timeline$term_lookup)
@@ -138,7 +136,7 @@ server <- function(input, output, session) {
                          app_data$timeline$annual_by_tipo,
                          app_data$timeline$term_lookup) %>% vela_plotly("light")
   })
-  
+
   output$tl_cumulative <- renderPlotly({
     req(app_data$timeline$annual_series)
     plot_timeline_cumulative(app_data$timeline$annual_series) %>% vela_plotly("light")
