@@ -315,57 +315,24 @@
       margin: 0 auto;
     }
 
-    /* ================= SEÇÃO MONITOR ================= */
-    #monitor {
-      background-color: var(--bg-dark-gray);
-      padding: 70px 0 80px;
-    }
+     <!-- ================= 2. SEÇÃO MONITOR (APP SHINY EMBUTIDO) ================= -->
+  <section id="monitor">
+    <div class="container">
+      <h1 class="section-title-lg">Monitor</h1>
+      <span class="tag-gold">[ÚLTIMA ATUALIZAÇÃO 14 09 2026]</span>
+    </div>
 
-    .section-title-lg {
-      font-size: 3rem;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-    }
-
-    .tag-gold {
-      display: inline-block;
-      color: var(--accent-gold);
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-top: 8px;
-      margin-bottom: 32px;
-    }
-
-    /* Bloco Claro dos Gráficos dentro do Monitor */
-    .monitor-charts-area {
-      background-color: var(--bg-cream);
-      color: var(--text-dark);
-      padding: 80px 0;
-    }
-
-    .charts-header {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 40px;
-      align-items: center;
-      margin-bottom: 60px;
-    }
-
-    .charts-header h2 {
-      font-size: 2.1rem;
-      font-weight: 900;
-      line-height: 1.15;
-    }
-
-    .charts-header p {
-      font-size: 0.95rem;
-      color: #555;
-      max-width: 380px;
-    }
-
+    <iframe
+      id="vela-monitor"
+      src="https://01a1d9f3-954f-2f09-4937-e99e9ae5da75.share.connect.posit.cloud/"
+      width="100%"
+      height="2400"
+      style="border:0; display:block;"
+      loading="lazy"
+      title="Monitor VELA">
+    </iframe>
+  </section>
+    
     /* ================= SEÇÃO METODOLOGIA ================= */
     #metodologia {
       background-color: var(--bg-black);
